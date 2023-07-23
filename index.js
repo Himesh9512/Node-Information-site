@@ -37,5 +37,15 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(6969, () => {
+<<<<<<< HEAD
 	console.log("the server is running!");
+=======
+<<<<<<< HEAD
+	console.log("the server is running!");
+=======
+	const { port } = server.address();
+
+	console.log(`the server is running on http://localhost:${port}`);
+>>>>>>> 5c028faeb46abf71e5a4c8c1692d6fd404647c33
+>>>>>>> 7e7959781495fc4092748ef0976a14c47e091941
 });
