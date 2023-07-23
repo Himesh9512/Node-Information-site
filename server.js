@@ -4,7 +4,7 @@ const fs = require("fs");
 const customReadFile = (res, path, code) => {
 	fs.readFile(path, (err, data) => {
 		if (err) {
-			res
+			return res
 				.writeHead(500, {
 					"Content-Type": "text/plain",
 				})
