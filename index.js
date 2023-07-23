@@ -36,7 +36,7 @@ const server = http.createServer(async (req, res) => {
 	}
 });
 
-server.listen(4001, () => {
+server.listen(6969, () => {
 	const { port } = server.address();
 
 	console.log(`the server is running on http://localhost:${port}`);
