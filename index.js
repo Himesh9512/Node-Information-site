@@ -1,41 +1,30 @@
-const http = require("http");
-const fs = require("fs");
+const express = require("express");
+const app = express();
 
-const customReadFile = (res, path, code) => {
-	fs.readFile(path, (err, data) => {
-		if (err) {
-			return res
-				.writeHead(500, {
-					"Content-Type": "text/plain",
-				})
-				.end("Internal Server error");
-		}
-		return res
-			.writeHead(code, {
-				ContentType: "text/html",
-			})
-			.end(data);
-	});
-};
-
-const server = http.createServer(async (req, res) => {
-	const url = req.url;
-
-	switch (url) {
-		case "/":
-			customReadFile(res, "./index.html", 200);
-
-		case "/contact-me":
-			customReadFile(res, "./contact-me.html", 200);
-
-		case "/about":
-			customReadFile(res, "./about.html", 200);
-
-		default:
-			customReadFile(res, "./404.html", 404);
-	}
+app.get("/", (req, res) => {
+	res.status(200);
+	res.setHeader("Content-Type", "text/html");
+	res.sendFile("/index.html", { root: __dirname });
 });
 
-server.listen(6969, () => {
-	console.log("the server is running!");
+app.get("/contact-me", (req, res) => {
+	res.status(200);
+	res.setHeader("Content-Type", "text/html");
+	res.sendFile("/contact-me.html", { root: __dirname });
+});
+
+app.get("/about", (req, res) => {
+	res.status(200);
+	res.setHeader("Content-Type", "text/html");
+	res.sendFile("/about.html", { root: __dirname });
+});
+
+app.get("*", (req, res) => {
+	res.status(404);
+	res.setHeader("Content-Type", "text/html");
+	res.sendFile("/404.html", { root: __dirname });
+});
+
+app.listen(6969, () => {
+	console.log("server is running on http://localhost:6969");
 });
